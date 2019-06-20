@@ -3,7 +3,6 @@
 <<<<<<< HEAD
 Tejas Parikh!!!!
 
-Gaurao Thakur!!!!
 =======
 ## Team Information
 
