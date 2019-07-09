@@ -70,7 +70,11 @@
                 "sudo wget https://www-us.apache.org/dist/tomcat/tomcat-9/v9.0.21/bin/apache-tomcat-9.0.21.tar.gz",
                 "sudo mkdir /opt/tomcat",
                 "sudo tar xvf apache-tomcat-*tar.gz -C /opt/tomcat --strip-components=1",
-                "echo \"Tomcat installed\""
+                "echo \"Tomcat installed\"",
+                "sudo chmod 777 /opt/tomcat/webapps/",
+                "sudo chmod 777 /opt/tomcat/bin/",
+                "sudo chmod 777 /opt/tomcat/bin/*",
+                "sudo chmod 777 /opt/tomcat/webapps/*"
 
             ]
             
