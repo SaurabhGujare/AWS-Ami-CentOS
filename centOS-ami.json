@@ -71,11 +71,34 @@
                 "sudo mkdir /opt/tomcat",
                 "sudo tar xvf apache-tomcat-*tar.gz -C /opt/tomcat --strip-components=1",
                 "echo \"Tomcat installed\"",
+                "sudo chmod 777 /opt/tomcat/*",
                 "sudo chmod 777 /opt/tomcat/webapps/",
                 "sudo chmod 777 /opt/tomcat/bin/",
                 "sudo chmod 777 /opt/tomcat/bin/*",
-                "sudo chmod 777 /opt/tomcat/webapps/*"
-
+                "sudo chmod 777 /opt/tomcat/webapps/*",
+                "echo export CATALINA_HOME='/opt/tomcat/' >> ~/.bashrc",
+                "sudo useradd -r tomcat --shell /bin/false",
+                "sudo chown -R tomcat:tomcat /opt/tomcat/",
+                "sudo chmod -R 777 /etc/systemd/system/",
+                "sudo cat > /etc/systemd/system/tomcat.service << EOF",
+                "[Unit]",
+                "Description= Tomcat 9",
+                "After=syslog.target network.target",
+                "[Service]",
+                "sudo User=tomcat",
+                "sudo Group=tomcat",
+                "Type=forking",
+                "Environment=JAVA_HOME=/opt/jdk-12.0.1",
+                "Environment=CATALINA_PID=/opt/tomcat/temp/tomcat.pid",
+                "Environment=CATALINA_HOME=/opt/tomcat",
+                "Environment=CATALINA_BASE=/opt/tomcat",
+                "Environment='JAVA_OPTS=-Djava.awt.headless=true -Djava.security.egd:/dev/./urandom'",
+                "ExecStart=/opt/tomcat/bin/startup.sh",
+                "ExecStop=/opt/tomcat/bin/shutdown.sh",
+                "Restart=on-failure",
+                "[Install]",
+                "wantedBy=multi-user.target",
+                "EOF"
             ]
             
         }
